@@ -1,2 +1,3 @@
-# Android101
-Codebase related to my Android 101 course
+# Android Development 101
+
+This is the codebase related to my Android Development 101 course
