@@ -3,4 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- Home screen-->
+    <string name="home_button_convert">Convert</string>
+    <string name="home_input_hint">Insert number</string>
+    <string name="home_label_inch">inch</string>
+    <string name="home_label_cm">cm</string>
+
 </resources>

@@ -6,17 +6,67 @@
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment">
 
-    <TextView
-            android:id="@+id/text_home"
-            android:layout_width="match_parent"
+    <EditText
+            android:id="@+id/inch_editText"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:hint="@string/home_input_hint"
+            android:inputType="numberDecimal"
+            android:importantForAutofill="no"
+            style="@style/Text.Header3"
+            tools:text="1"
+            app:layout_constraintVertical_bias="0.35"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+            android:id="@+id/inch_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_m"
+            android:text="@string/home_label_inch"
+            style="@style/Text.Body"
+            app:layout_constraintTop_toTopOf="@+id/inch_editText"
+            app:layout_constraintBottom_toBottomOf="@+id/inch_editText"
+            app:layout_constraintStart_toEndOf="@+id/inch_editText" />
+
+    <EditText
+            android:id="@+id/cm_editText"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:hint="@string/home_input_hint"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="@dimen/spacing_xxxl"
+            android:importantForAutofill="no"
+            style="@style/Text.Header3"
+            tools:text="2.54"
+            app:layout_constraintTop_toBottomOf="@+id/inch_editText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+            android:id="@+id/cm_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_m"
+            android:text="@string/home_label_cm"
+            style="@style/Text.Body"
+            app:layout_constraintTop_toTopOf="@+id/cm_editText"
+            app:layout_constraintBottom_toBottomOf="@+id/cm_editText"
+            app:layout_constraintStart_toEndOf="@+id/cm_editText" />
+
+    <Button
+            android:id="@+id/convert_button"
+            android:text="@string/home_button_convert"
+            android:layout_margin="@dimen/spacing_xxs"
+            android:padding="@dimen/spacing_s"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
