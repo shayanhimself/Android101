@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Text"/>
+
+    <style name="Text.Body">
+        <item name="android:textColor">@color/text_body</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+
+    <style name="Text.Header1">
+        <item name="android:textColor">@color/text_header_primary</item>
+        <item name="android:textSize">@dimen/text_heading_l</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Header2">
+        <item name="android:textColor">@color/text_header_primary</item>
+        <item name="android:textSize">@dimen/text_heading_m</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Header3">
+        <item name="android:textColor">@color/text_header_primary</item>
+        <item name="android:textSize">@dimen/text_heading_s</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>
