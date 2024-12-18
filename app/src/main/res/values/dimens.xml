@@ -18,4 +18,7 @@
     <dimen name="text_heading_s">22sp</dimen>
     <dimen name="text_heading_m">24sp</dimen>
     <dimen name="text_heading_l">28sp</dimen>
+
+    <!-- Other -->
+    <dimen name="rounded_corner">8dp</dimen>
 </resources>

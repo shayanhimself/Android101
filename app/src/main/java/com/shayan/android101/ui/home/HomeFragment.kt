@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.shayan.android101.databinding.FragmentHomeBinding
+import coil.load
+import coil.transform.RoundedCornersTransformation
+import com.shayan.android101.R
 
 class HomeFragment : Fragment() {
 
@@ -28,10 +30,22 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val cornerRadius = context?.resources?.getDimension(R.dimen.rounded_corner) ?: 1f
+
+        with(binding) {
+            title.text = "This Jacket That Makes You Cooler Than the Weather"
+            description.text = "Step into ultimate style and comfort with this versatile jacket. Whether you're braving chilly winds or just pretending it’s cold enough to look this good, this jacket's got you covered—literally. Bonus: It has pockets. Yes, REAL ones. \uD83D\uDD25"
+            price.text = "$ 12.90"
+            rating.text = "4.5 (340 ratings)"
+            photo.load("https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg") {
+                transformations(RoundedCornersTransformation(cornerRadius))
+            }
         }
+
+//        val textView: TextView = binding.textHome
+//        homeViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 
