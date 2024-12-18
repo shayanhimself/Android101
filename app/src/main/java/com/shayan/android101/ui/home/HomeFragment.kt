@@ -30,6 +30,16 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+//        val textView: TextView = binding.textHome
+//        homeViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val cornerRadius = context?.resources?.getDimension(R.dimen.rounded_corner) ?: 1f
 
         with(binding) {
@@ -44,9 +54,8 @@ class HomeFragment : Fragment() {
 
 //        val textView: TextView = binding.textHome
 //        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
+//            Log.d("HomeFragment", "onViewCreated: $it")
 //        }
-        return root
     }
 
     override fun onDestroyView() {
