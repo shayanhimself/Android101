@@ -51,11 +51,6 @@ class HomeFragment : Fragment() {
                 transformations(RoundedCornersTransformation(cornerRadius))
             }
         }
-
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            Log.d("HomeFragment", "onViewCreated: $it")
-//        }
     }
 
     override fun onDestroyView() {
