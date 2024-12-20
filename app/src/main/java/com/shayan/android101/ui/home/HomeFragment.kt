@@ -34,23 +34,20 @@ class HomeFragment : Fragment() {
 //        homeViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
-        return root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         val cornerRadius = context?.resources?.getDimension(R.dimen.rounded_corner) ?: 1f
 
         with(binding) {
             title.text = "This Jacket That Makes You Cooler Than the Weather"
             description.text = "Step into ultimate style and comfort with this versatile jacket. Whether you're braving chilly winds or just pretending it’s cold enough to look this good, this jacket's got you covered—literally. Bonus: It has pockets. Yes, REAL ones. \uD83D\uDD25"
-            price.text = "$ 12.90"
-            rating.text = "4.5 (340 ratings)"
+            price.text = getString(R.string.price_formatted, 9.9f)
+            rating.text = getString(R.string.rating_formatted, 4.5f, 340)
             photo.load("https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg") {
                 transformations(RoundedCornersTransformation(cornerRadius))
             }
         }
+
+        return root
     }
 
     override fun onDestroyView() {
