@@ -10,6 +10,7 @@ import com.shayan.android101.databinding.FragmentHomeBinding
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.shayan.android101.R
+import com.shayan.android101.datamodel.Product
 
 class HomeFragment : Fragment() {
 
@@ -30,25 +31,24 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
-
-        val cornerRadius = context?.resources?.getDimension(R.dimen.rounded_corner) ?: 1f
-
-        with(binding) {
-            title.text = "This Jacket That Makes You Cooler Than the Weather"
-            description.text = "Step into ultimate style and comfort with this versatile jacket. Whether you're braving chilly winds or just pretending it’s cold enough to look this good, this jacket's got you covered—literally. Bonus: It has pockets. Yes, REAL ones. \uD83D\uDD25"
-            price.text = getString(R.string.price_formatted, 9.9f)
-            rating.text = getString(R.string.rating_formatted, 4.5f, 340)
-            photo.load("https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg") {
-                placeholder(R.drawable.placeholder)
-                transformations(RoundedCornersTransformation(cornerRadius))
-            }
+        homeViewModel.product.observe(viewLifecycleOwner) {
+            updateUI(it)
         }
 
         return root
+    }
+
+    private fun updateUI(product: Product) = with(binding) {
+        val cornerRadius = context?.resources?.getDimension(R.dimen.rounded_corner) ?: 1f
+
+        title.text = product.title
+        description.text = product.description
+        price.text = getString(R.string.price_formatted, product.price)
+        rating.text = getString(R.string.rating_formatted, product.rating.rate, product.rating.count)
+        photo.load(product.image) {
+            placeholder(R.drawable.placeholder)
+            transformations(RoundedCornersTransformation(cornerRadius))
+        }
     }
 
     override fun onDestroyView() {
