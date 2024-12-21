@@ -43,6 +43,7 @@ class HomeFragment : Fragment() {
             price.text = getString(R.string.price_formatted, 9.9f)
             rating.text = getString(R.string.rating_formatted, 4.5f, 340)
             photo.load("https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg") {
+                placeholder(R.drawable.placeholder)
                 transformations(RoundedCornersTransformation(cornerRadius))
             }
         }
