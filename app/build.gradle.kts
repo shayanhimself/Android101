@@ -52,6 +52,11 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // Image loading
     implementation(libs.coil)
 
+    // Networking
+    implementation(libs.retrofit)
+    implementation(libs.retrofitConverterGson)
+    implementation(libs.okhttpLogging)
 }

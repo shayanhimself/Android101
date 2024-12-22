@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.shayan.android101.databinding.FragmentHomeBinding
 import coil.load
-import coil.transform.RoundedCornersTransformation
 import com.shayan.android101.R
 
 class HomeFragment : Fragment() {
@@ -41,17 +40,11 @@ class HomeFragment : Fragment() {
         progressBar.visibility = if (viewState.isLoading) View.VISIBLE else View.GONE
 
         viewState.product?.let { product ->
-
-            val cornerRadius = context?.resources?.getDimension(R.dimen.rounded_corner) ?: 1f
-
             title.text = product.title
             description.text = product.description
             price.text = getString(R.string.price_formatted, product.price)
             rating.text = getString(R.string.rating_formatted, product.rating.rate, product.rating.count)
-
-            photo.load(product.image) {
-                transformations(RoundedCornersTransformation(cornerRadius))
-            }
+            photo.load(product.image)
         }
     }
 
