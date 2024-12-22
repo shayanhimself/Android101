@@ -10,7 +10,6 @@ import com.shayan.android101.databinding.FragmentHomeBinding
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.shayan.android101.R
-import com.shayan.android101.datamodel.Product
 
 class HomeFragment : Fragment() {
 
@@ -31,22 +30,28 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        homeViewModel.product.observe(viewLifecycleOwner) {
+        homeViewModel.viewState.observe(viewLifecycleOwner) {
             updateUI(it)
         }
 
         return root
     }
 
-    private fun updateUI(product: Product) = with(binding) {
-        val cornerRadius = context?.resources?.getDimension(R.dimen.rounded_corner) ?: 1f
+    private fun updateUI(viewState: HomeViewModel.ViewState) = with(binding) {
+        progressBar.visibility = if (viewState.isLoading) View.VISIBLE else View.GONE
 
-        title.text = product.title
-        description.text = product.description
-        price.text = getString(R.string.price_formatted, product.price)
-        rating.text = getString(R.string.rating_formatted, product.rating.rate, product.rating.count)
-        photo.load(product.image) {
-            transformations(RoundedCornersTransformation(cornerRadius))
+        viewState.product?.let { product ->
+
+            val cornerRadius = context?.resources?.getDimension(R.dimen.rounded_corner) ?: 1f
+
+            title.text = product.title
+            description.text = product.description
+            price.text = getString(R.string.price_formatted, product.price)
+            rating.text = getString(R.string.rating_formatted, product.rating.rate, product.rating.count)
+
+            photo.load(product.image) {
+                transformations(RoundedCornersTransformation(cornerRadius))
+            }
         }
     }
 
