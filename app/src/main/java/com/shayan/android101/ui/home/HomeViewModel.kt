@@ -16,6 +16,7 @@ class HomeViewModel(
     data class ViewState(
         val product: Product? = null,
         val isLoading: Boolean,
+        val hasError: Boolean = false
     )
 
     private val _viewState = MutableLiveData<ViewState>()
@@ -23,11 +24,17 @@ class HomeViewModel(
 
     init {
         _viewState.value = ViewState(isLoading = true)
+        fetchProduct()
+    }
 
-        viewModelScope.launch {
-            val id = Random.nextInt(from = 1, until = 20)
+    private fun fetchProduct() = viewModelScope.launch {
+        val id = Random.nextInt(from = 1, until = 20)
+
+        try {
             val product = api.getProduct(id)
             _viewState.value = ViewState(product = product, isLoading = false)
+        } catch (e: Exception) {
+            _viewState.value = ViewState(hasError = true, isLoading = false)
         }
     }
 }

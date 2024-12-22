@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="error_general">Yikes! Something broke…😬\nMaybe try later</string>
 
     <string name="price_formatted">$ %.2f</string>
     <string name="rating_formatted">%.1f (%d ratings)</string>

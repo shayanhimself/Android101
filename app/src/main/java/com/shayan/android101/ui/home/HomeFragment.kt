@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
 
     private fun updateUI(viewState: HomeViewModel.ViewState) = with(binding) {
         progressBar.visibility = if (viewState.isLoading) View.VISIBLE else View.GONE
+        error.visibility = if (viewState.hasError) View.VISIBLE else View.GONE
 
         viewState.product?.let { product ->
             title.text = product.title
