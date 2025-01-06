@@ -13,12 +13,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.shayan.android101.ui.theme.Android101Theme
+import com.shayan.android101.ui.theme.SpacingM
+import com.shayan.android101.ui.theme.SpacingXL
 
 @Composable
 fun ProductScreen() {
@@ -31,46 +29,36 @@ fun ProductScreen() {
             Text(
                 text = "This Jacket That Makes You Cooler Than the Weather",
                 color = MaterialTheme.colorScheme.primary,
-                style = TextStyle(
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold
-                ),
-                modifier = Modifier.padding(16.dp)
+                style = MaterialTheme.typography.headlineSmall,
+                modifier = Modifier.padding(SpacingM)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(SpacingM))
 
             Text(
                 text = "Step into ultimate style and comfort with this versatile jacket. Whether you're braving chilly winds or just pretending it’s cold enough to look this good, this jacket's got you covered—literally. Bonus: It has pockets. Yes, REAL ones. \uD83D\uDD25",
                 color = MaterialTheme.colorScheme.onBackground,
-                style = TextStyle(
-                    fontSize = 18.sp,
-                ),
-                modifier = Modifier.padding(horizontal = 16.dp)
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.padding(horizontal = SpacingM)
             )
         }
 
         Text(
             text = "$ 9.90",
             color = MaterialTheme.colorScheme.secondary,
-            style = TextStyle(
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold
-            ),
+            style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier
                 .align(Alignment.BottomStart)
-                .padding(start = 16.dp, bottom = 32.dp)
+                .padding(start = SpacingM, bottom = SpacingXL)
         )
 
         Text(
             text = "4.5 (340 ratings)",
             color = MaterialTheme.colorScheme.onBackground,
-            style = TextStyle(
-                fontSize = 18.sp,
-            ),
+            style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(end = 16.dp, bottom = 32.dp)
+                .padding(end = SpacingM, bottom = SpacingXL)
         )
     }
 
