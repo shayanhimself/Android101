@@ -19,13 +19,17 @@ import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.shayan.android101.ui.components.MyTopAppBar
 import com.shayan.android101.ui.theme.Android101Theme
 import com.shayan.android101.ui.theme.SpacingM
 import com.shayan.android101.ui.theme.SpacingXL
 
 @Composable
 fun ProductScreen() {
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = { MyTopAppBar() }
+    ) { innerPadding ->
         Box(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.background)
