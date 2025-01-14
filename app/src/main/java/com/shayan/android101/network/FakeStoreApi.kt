@@ -8,5 +8,5 @@ class FakeStoreApi {
     private val client = KtorClient.client
     private val baseUrl = "https://fakestoreapi.shayanaryan.com"
 
-    fun getProduct(id: Int): Product = client.get("$baseUrl/products/$id").body()
+    suspend fun getProduct(id: Int): Product = client.get("$baseUrl/products/$id").body()
 }
