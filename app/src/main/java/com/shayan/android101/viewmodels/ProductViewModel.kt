@@ -13,7 +13,7 @@ class ProductViewModel : ViewModel() {
     val product = MutableStateFlow<Product?>(null)
 
     private fun fetchProduct() = viewModelScope.launch {
-        val response = api.getProduct(id = 1)
+        val response = api.getProduct(id = 2)
         product.value = response
     }
 
