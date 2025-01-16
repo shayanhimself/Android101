@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.shayan.android101.datamodel.Product
+import com.shayan.android101.datamodel.Rating
 import com.shayan.android101.ui.components.MyTopAppBar
 import com.shayan.android101.ui.theme.Android101Theme
 import com.shayan.android101.ui.theme.SpacingM
@@ -33,16 +34,32 @@ import com.shayan.android101.viewmodels.ProductViewModel
 
 @Composable
 fun ProductScreen(
-    viewModel: ProductViewModel
+    viewModel: ProductViewModel,
 ) {
-    val product by viewModel.product.collectAsStateWithLifecycle()
+    val viewState by viewModel.viewState.collectAsStateWithLifecycle()
+    ProductScreen(viewState)
+}
 
+@Composable
+private fun ProductScreen(
+    viewState: ProductViewModel.ViewState,
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { MyTopAppBar() }
     ) { innerPadding ->
-        product?.let {
+
+        viewState.product?.let {
             ProductContent(it, innerPadding)
+        }
+
+        if (viewState.isLoading) {
+            LinearProgressIndicator(
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = innerPadding.calculateTopPadding() + SpacingXXS)
+            )
         }
     }
 }
@@ -110,15 +127,36 @@ private fun ProductContent(
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ProductScreenDarkPreview() {
-//    Android101Theme {
-//        ProductScreen()
-//    }
+    Android101Theme {
+        ProductScreen(
+            viewState = ProductViewModel.ViewState(
+                product = Product(
+                    id = 1,
+                    title = "T-Shirt of Infinite Comfort and Questionable Decisions",
+                    description = "This t-shirt doesn't just sit on your torso—it defines your vibe. Perfect for lazy Sundays, or making that one friend ask, \"What's going on?\".\nSoft, breathable, and questionable in all the right ways. Warning: May attract compliments. \uD83E\uDD9D\uD83D\uDD25",
+                    image = "https://fakestoreapi.shayanaryan.com/img/51eg55uWmdL.jpg",
+                    category = "Men's clothing",
+                    price = 19.99f,
+                    rating = Rating(
+                        rate = 4.5f,
+                        count = 238
+                    )
+                ),
+                isLoading = false,
+            )
+        )
+    }
 }
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
 fun ProductScreenLightPreview() {
-//    Android101Theme {
-//        ProductScreen()
-//    }
+    Android101Theme {
+        ProductScreen(
+            viewState = ProductViewModel.ViewState(
+                product = null,
+                isLoading = true,
+            )
+        )
+    }
 }

@@ -1,5 +1,6 @@
 package com.shayan.android101.viewmodels
 
+import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shayan.android101.datamodel.Product
@@ -12,7 +13,16 @@ import kotlinx.coroutines.flow.stateIn
 class ProductViewModel : ViewModel() {
     private val api = FakeStoreApi()
 
-    val product: StateFlow<Product?> = flow {
-        emit(api.getProduct(id = 2))
-    }.stateIn(viewModelScope, SharingStarted.Lazily, null)
+    class ViewState(
+        val product: Product? = null,
+        val isLoading: Boolean = true
+    )
+
+    val viewState: StateFlow<ViewState> = flow {
+        val product = api.getProduct(id = 2)
+        emit(ViewState(
+            product = product,
+            isLoading = false,
+        ))
+    }.stateIn(viewModelScope, SharingStarted.Lazily, ViewState())
 }
