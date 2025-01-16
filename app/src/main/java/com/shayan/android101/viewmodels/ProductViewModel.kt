@@ -13,6 +13,6 @@ class ProductViewModel : ViewModel() {
     private val api = FakeStoreApi()
 
     val product: StateFlow<Product?> = flow {
-        emit(api.getProduct(id = 1))
+        emit(api.getProduct(id = 2))
     }.stateIn(viewModelScope, SharingStarted.Lazily, null)
 }
