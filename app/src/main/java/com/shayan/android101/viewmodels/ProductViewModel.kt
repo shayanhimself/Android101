@@ -8,13 +8,19 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class ProductViewModel : ViewModel() {
+
+    class ViewState(
+        val product: Product? = null,
+        val isLoading: Boolean = false,
+    )
+
     private val api = FakeStoreApi()
 
-    val product = MutableStateFlow<Product?>(null)
+    val viewState = MutableStateFlow(ViewState(isLoading = true))
 
     private fun fetchProduct() = viewModelScope.launch {
-        val response = api.getProduct(id = 2)
-        product.value = response
+        val product = api.getProduct(id = 2)
+        viewState.value = ViewState(product = product)
     }
 
     init {
