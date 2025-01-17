@@ -1,6 +1,5 @@
 package com.shayan.android101.viewmodels
 
-import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shayan.android101.datamodel.Product

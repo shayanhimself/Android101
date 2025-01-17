@@ -19,10 +19,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.shayan.android101.R
 import com.shayan.android101.datamodel.Product
 import com.shayan.android101.datamodel.Rating
 import com.shayan.android101.ui.components.MyTopAppBar
@@ -105,7 +107,7 @@ private fun ProductContent(
         }
 
         Text(
-            text = "$ 19.99",
+            text = stringResource(R.string.price_formatted, product.price),
             color = MaterialTheme.colorScheme.secondary,
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier
@@ -113,8 +115,11 @@ private fun ProductContent(
                 .padding(start = SpacingM, bottom = SpacingXL)
         )
 
+        val rate = product.rating.rate
+        val count = product.rating.count
+
         Text(
-            text = "4.5 (238 ratings)",
+            text = stringResource(R.string.rating_formatted, rate, count),
             color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier
@@ -136,9 +141,9 @@ fun ProductScreenDarkPreview() {
                     description = "This t-shirt doesn't just sit on your torso—it defines your vibe. Perfect for lazy Sundays, or making that one friend ask, \"What's going on?\".\nSoft, breathable, and questionable in all the right ways. Warning: May attract compliments. \uD83E\uDD9D\uD83D\uDD25",
                     image = "https://fakestoreapi.shayanaryan.com/img/51eg55uWmdL.jpg",
                     category = "Men's clothing",
-                    price = 19.99f,
+                    price = 19.90f,
                     rating = Rating(
-                        rate = 4.5f,
+                        rate = 4.9f,
                         count = 238
                     )
                 ),

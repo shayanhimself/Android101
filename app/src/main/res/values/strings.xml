@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Fake Store</string>
+
+    <string name="price_formatted">$ %.2f</string>
+    <string name="rating_formatted">%.1f (%d ratings)</string>
+
 </resources>
