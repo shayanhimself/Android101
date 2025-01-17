@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import coil.compose.AsyncImage
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -62,6 +63,10 @@ private fun ProductScreen(
                     .fillMaxWidth()
                     .padding(top = innerPadding.calculateTopPadding() + SpacingXXS)
             )
+        }
+
+        if (viewState.hasError) {
+            ErrorMessage(innerPadding)
         }
     }
 }
@@ -129,6 +134,23 @@ private fun ProductContent(
     }
 }
 
+@Composable
+private fun ErrorMessage(innerPadding: PaddingValues) {
+    Box(
+        modifier = Modifier
+            .padding(innerPadding)
+            .fillMaxSize()
+    ) {
+        Text(
+            text = stringResource(R.string.error_general),
+            color = MaterialTheme.colorScheme.onBackground,
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.align(Alignment.Center),
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ProductScreenDarkPreview() {
@@ -153,14 +175,28 @@ fun ProductScreenDarkPreview() {
     }
 }
 
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview
 @Composable
-fun ProductScreenLightPreview() {
+fun ProductScreenLoadingPreview() {
     Android101Theme {
         ProductScreen(
             viewState = ProductViewModel.ViewState(
                 product = null,
                 isLoading = true,
+            )
+        )
+    }
+}
+
+@Preview
+@Composable
+fun ProductScreenErrorPreview() {
+    Android101Theme {
+        ProductScreen(
+            viewState = ProductViewModel.ViewState(
+                product = null,
+                isLoading = false,
+                hasError = true,
             )
         )
     }
