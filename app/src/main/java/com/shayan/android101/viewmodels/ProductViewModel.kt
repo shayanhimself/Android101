@@ -6,7 +6,7 @@ import com.shayan.android101.datamodel.Product
 import com.shayan.android101.network.FakeStoreApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.catch
+import kotlin.random.Random
 
 class ProductViewModel : ViewModel() {
 
@@ -22,7 +22,8 @@ class ProductViewModel : ViewModel() {
 
     private fun fetchProduct() = viewModelScope.launch {
         try {
-            val product = api.getProduct(id = 2)
+            val id = Random.nextInt(1, 6)
+            val product = api.getProduct(id)
             viewState.value = ViewState(product = product)
         } catch (e: Exception) {
             viewState.value = ViewState(hasError = true)
@@ -30,6 +31,11 @@ class ProductViewModel : ViewModel() {
     }
 
     init {
+        fetchProduct()
+    }
+
+    fun refresh() {
+        viewState.value = ViewState(isLoading = true)
         fetchProduct()
     }
 }
