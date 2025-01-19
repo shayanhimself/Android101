@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -20,6 +22,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -36,6 +40,7 @@ import com.shayan.android101.ui.theme.SpacingL
 import com.shayan.android101.ui.theme.SpacingM
 import com.shayan.android101.ui.theme.SpacingXL
 import com.shayan.android101.ui.theme.SpacingXXS
+import com.shayan.android101.ui.theme.SpacingXXXXL
 import com.shayan.android101.viewmodels.ProductViewModel
 
 @Composable
@@ -89,7 +94,11 @@ private fun ProductContent(
             .padding(innerPadding)
             .fillMaxSize()
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
             AsyncImage(
                 model = product.image,
                 contentDescription = "",
@@ -116,8 +125,25 @@ private fun ProductContent(
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(horizontal = SpacingM)
             )
+
+            Spacer(modifier = Modifier.height(SpacingXXXXL))
         }
 
+        Box (
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(SpacingXXXXL)
+                .align(Alignment.BottomCenter)
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            MaterialTheme.colorScheme.background,
+                            MaterialTheme.colorScheme.background,
+                        )
+                    )
+                )
+        )
         Text(
             text = stringResource(R.string.price_formatted, product.price),
             color = MaterialTheme.colorScheme.secondary,
