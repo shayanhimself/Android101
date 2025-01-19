@@ -2,6 +2,7 @@ package com.shayan.android101.ui.screens
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -30,6 +32,7 @@ import com.shayan.android101.datamodel.Product
 import com.shayan.android101.datamodel.Rating
 import com.shayan.android101.ui.components.MyTopAppBar
 import com.shayan.android101.ui.theme.Android101Theme
+import com.shayan.android101.ui.theme.SpacingL
 import com.shayan.android101.ui.theme.SpacingM
 import com.shayan.android101.ui.theme.SpacingXL
 import com.shayan.android101.ui.theme.SpacingXXS
@@ -40,12 +43,16 @@ fun ProductScreen(
     viewModel: ProductViewModel,
 ) {
     val viewState by viewModel.viewState.collectAsStateWithLifecycle()
-    ProductScreen(viewState)
+    ProductScreen(
+        viewState = viewState,
+        onRefresh = viewModel::refresh
+    )
 }
 
 @Composable
 private fun ProductScreen(
     viewState: ProductViewModel.ViewState,
+    onRefresh: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -66,7 +73,7 @@ private fun ProductScreen(
         }
 
         if (viewState.hasError) {
-            ErrorMessage(innerPadding)
+            ErrorMessage(innerPadding, onRefresh)
         }
     }
 }
@@ -135,19 +142,32 @@ private fun ProductContent(
 }
 
 @Composable
-private fun ErrorMessage(innerPadding: PaddingValues) {
-    Box(
+private fun ErrorMessage(
+    innerPadding: PaddingValues,
+    onRefresh: () -> Unit,
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(innerPadding)
             .fillMaxSize()
     ) {
         Text(
             text = stringResource(R.string.error_general),
-            color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.align(Alignment.Center),
             textAlign = TextAlign.Center
         )
+
+        Spacer(modifier = Modifier.height(SpacingL))
+
+        Button(onClick = onRefresh) {
+            Text(
+                text = stringResource(R.string.retry),
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.padding(horizontal = SpacingM),
+            )
+        }
     }
 }
 
@@ -170,7 +190,8 @@ fun ProductScreenDarkPreview() {
                     )
                 ),
                 isLoading = false,
-            )
+            ),
+            onRefresh = {},
         )
     }
 }
@@ -183,7 +204,8 @@ fun ProductScreenLoadingPreview() {
             viewState = ProductViewModel.ViewState(
                 product = null,
                 isLoading = true,
-            )
+            ),
+            onRefresh = {},
         )
     }
 }
@@ -197,7 +219,8 @@ fun ProductScreenErrorPreview() {
                 product = null,
                 isLoading = false,
                 hasError = true,
-            )
+            ),
+            onRefresh = {},
         )
     }
 }

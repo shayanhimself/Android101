@@ -5,5 +5,6 @@
     <string name="rating_formatted">%.1f (%d ratings)</string>
 
     <string name="error_general">Yikes! Something broke…😬\nMaybe try later</string>
+    <string name="retry">Retry</string>
 
 </resources>
