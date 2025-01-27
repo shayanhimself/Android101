@@ -12,11 +12,9 @@ class ProductViewModel : ViewModel() {
 
     val product = MutableStateFlow<Product?>(null)
 
-    private fun fetchProduct() {
-        viewModelScope.launch {
-            val response = api.getProduct(id = 1)
-            product.value = response
-        }
+    private fun fetchProduct() = viewModelScope.launch {
+        val response = api.getProduct(id = 1)
+        product.value = response
     }
 
     init {
