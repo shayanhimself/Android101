@@ -11,4 +11,4 @@ val SpacingL = 24.dp
 val SpacingXL = 32.dp
 val SpacingXXL = 48.dp
 val SpacingXXXL = 64.dp
-val SpacingXXXXL = 96.dp
+val SpacingXXXXL = 112.dp
