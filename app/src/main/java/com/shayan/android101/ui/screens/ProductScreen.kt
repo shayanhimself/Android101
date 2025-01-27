@@ -60,25 +60,30 @@ private fun ProductScreen(
     onRefresh: () -> Unit,
 ) {
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
         topBar = { MyTopAppBar() }
     ) { innerPadding ->
+        Box(
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            viewState.product?.let {
+                ProductContent(it)
+            }
 
-        viewState.product?.let {
-            ProductContent(it, innerPadding)
-        }
+            if (viewState.isLoading) {
+                LinearProgressIndicator(
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = SpacingXXS)
+                )
+            }
 
-        if (viewState.isLoading) {
-            LinearProgressIndicator(
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = innerPadding.calculateTopPadding() + SpacingXXS)
-            )
-        }
-
-        if (viewState.hasError) {
-            ErrorMessage(innerPadding, onRefresh)
+            if (viewState.hasError) {
+                ErrorMessage(onRefresh)
+            }
         }
     }
 }
@@ -86,14 +91,8 @@ private fun ProductScreen(
 @Composable
 private fun ProductContent(
     product: Product,
-    innerPadding: PaddingValues,
 ) {
-    Box(
-        modifier = Modifier
-            .background(MaterialTheme.colorScheme.background)
-            .padding(innerPadding)
-            .fillMaxSize()
-    ) {
+    Box {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -169,15 +168,12 @@ private fun ProductContent(
 
 @Composable
 private fun ErrorMessage(
-    innerPadding: PaddingValues,
     onRefresh: () -> Unit,
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .padding(innerPadding)
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Text(
             text = stringResource(R.string.error_general),
