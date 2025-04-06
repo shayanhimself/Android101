@@ -13,10 +13,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -38,7 +39,6 @@ import com.shayan.android101.ui.theme.Android101Theme
 import com.shayan.android101.ui.theme.SpacingL
 import com.shayan.android101.ui.theme.SpacingM
 import com.shayan.android101.ui.theme.SpacingXL
-import com.shayan.android101.ui.theme.SpacingXXS
 import com.shayan.android101.ui.theme.SpacingXXXXL
 import com.shayan.android101.viewmodels.ProductViewModel
 
@@ -53,6 +53,7 @@ fun ProductScreen(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ProductScreen(
     viewState: ProductViewModel.ViewState,
@@ -64,20 +65,15 @@ private fun ProductScreen(
             .background(MaterialTheme.colorScheme.background),
         topBar = { MyTopAppBar() }
     ) { innerPadding ->
-        Box(
-            modifier = Modifier.padding(innerPadding)
+        PullToRefreshBox(
+            isRefreshing = viewState.isLoading,
+            onRefresh = onRefresh,
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
         ) {
             viewState.product?.let {
                 ProductContent(it)
-            }
-
-            if (viewState.isLoading) {
-                LinearProgressIndicator(
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = SpacingXXS)
-                )
             }
 
             if (viewState.hasError) {
