@@ -34,7 +34,7 @@ class ProductViewModel : ViewModel() {
         fetchProduct()
     }
 
-    fun refresh() {
+    fun onRefresh() {
         viewState.value = ViewState(isLoading = true)
         fetchProduct()
     }

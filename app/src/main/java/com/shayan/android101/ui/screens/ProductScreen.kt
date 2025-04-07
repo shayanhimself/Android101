@@ -49,7 +49,7 @@ fun ProductScreen(
     val viewState by viewModel.viewState.collectAsStateWithLifecycle()
     ProductScreen(
         viewState = viewState,
-        onRefresh = viewModel::refresh
+        onRefresh = viewModel::onRefresh
     )
 }
 
