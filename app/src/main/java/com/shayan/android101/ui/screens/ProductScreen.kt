@@ -38,7 +38,7 @@ fun ProductScreen() {
         ) {
             Column {
                 AsyncImage(
-                    model = "https://fakestoreapi.shayanaryan.com/img/51eg55uWmdL.jpg",
+                    model = "https://shayanhimself.github.io/fake-store-api/img/51eg55uWmdL.jpg",
                     contentDescription = "",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier

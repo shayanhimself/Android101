@@ -6,7 +6,7 @@ import io.ktor.client.request.get
 
 class FakeStoreApi {
     private val client = KtorClient.client
-    private val baseUrl = "https://fakestoreapi.shayanaryan.com"
+    private val baseUrl = "https://shayanhimself.github.io/fake-store-api"
 
     suspend fun getProduct(id: Int): Product = client.get("$baseUrl/products/$id.json").body()
 }
