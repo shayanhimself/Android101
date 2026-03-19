@@ -45,11 +45,13 @@ import com.shayan.android101.viewmodels.ProductViewModel
 @Composable
 fun ProductScreen(
     viewModel: ProductViewModel,
+    onBackClick: () -> Unit,
 ) {
     val viewState by viewModel.viewState.collectAsStateWithLifecycle()
     ProductScreen(
         viewState = viewState,
-        onRefresh = viewModel::onRefresh
+        onRefresh = viewModel::onRefresh,
+        onBackClick = onBackClick,
     )
 }
 
@@ -58,12 +60,13 @@ fun ProductScreen(
 private fun ProductScreen(
     viewState: ProductViewModel.ViewState,
     onRefresh: () -> Unit,
+    onBackClick: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
-        topBar = { MyTopAppBar() }
+        topBar = { MyTopAppBar(onBackClick = onBackClick) }
     ) { innerPadding ->
         PullToRefreshBox(
             isRefreshing = viewState.isLoading,
@@ -209,6 +212,7 @@ fun ProductScreenDarkPreview() {
                 isLoading = false,
             ),
             onRefresh = {},
+            onBackClick = {},
         )
     }
 }
@@ -223,6 +227,7 @@ fun ProductScreenLoadingPreview() {
                 isLoading = true,
             ),
             onRefresh = {},
+            onBackClick = {},
         )
     }
 }
@@ -238,6 +243,7 @@ fun ProductScreenErrorPreview() {
                 hasError = true,
             ),
             onRefresh = {},
+            onBackClick = {},
         )
     }
 }

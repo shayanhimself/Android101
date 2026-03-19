@@ -7,10 +7,10 @@ import com.shayan.android101.network.FakeStoreApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class ProductViewModel(private val productId: Int) : ViewModel() {
+class ProductListViewModel : ViewModel() {
 
-    class ViewState(
-        val product: Product? = null,
+    data class ViewState(
+        val products: List<Product> = emptyList(),
         val isLoading: Boolean = false,
         val hasError: Boolean = false,
     )
@@ -19,21 +19,21 @@ class ProductViewModel(private val productId: Int) : ViewModel() {
 
     val viewState = MutableStateFlow(ViewState(isLoading = true))
 
-    private fun fetchProduct() = viewModelScope.launch {
+    private fun fetchProducts() = viewModelScope.launch {
         try {
-            val product = api.getProduct(productId)
-            viewState.value = ViewState(product = product)
+            val products = api.getAllProducts()
+            viewState.value = ViewState(products = products)
         } catch (e: Exception) {
             viewState.value = ViewState(hasError = true)
         }
     }
 
     init {
-        fetchProduct()
+        fetchProducts()
     }
 
     fun onRefresh() {
         viewState.value = ViewState(isLoading = true)
-        fetchProduct()
+        fetchProducts()
     }
 }

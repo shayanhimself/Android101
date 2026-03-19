@@ -9,4 +9,8 @@ class FakeStoreApi {
     private val baseUrl = "https://shayanhimself.github.io/fake-store-api"
 
     suspend fun getProduct(id: Int): Product = client.get("$baseUrl/products/$id.json").body()
+
+    suspend fun getAllProducts(): List<Product> {
+        return (1..5).map { id -> getProduct(id) }
+    }
 }
